@@ -13,8 +13,7 @@ Para executar o projeto é necessário ter inslado no computador as ferramentas:
 - Telnet (para acessar o servidor)
 
 ## Bibliotecas utilizadas:
-- Moment.JS (para validação da busca entre periodos)
-- Nodemon (Para manter o projeto executando e auto-atualizando)
+- amqplib (para gerir o consumo e criação de filas)
 
 ## Como iniciar o projeto (Windows).
 - Clonar o projeto (https://github.com/masc1005/laungery-queue.git)
