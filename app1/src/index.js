@@ -1,15 +1,18 @@
 const net = require("node:net");
+const path = require("node:path");
+
+const configRabbitmq = path.resolve(__dirname, "config", "./config/rabbitmq");
 
 const {
   assertQueue,
   sendToQueue,
   consumeQueue,
   closeConnection,
-} = require("./config/rabbitmq");
+} = require(configRabbitmq);
 
 const server = net.createServer((socket) => {
-  socket.write("Bem-vindos ao servidor de filas da lavanderia lava-lava \n");
-  socket.write("Envie sua mensagem a baixo: \n\n");
+  socket.write("Bem-vindos ao servidor de filas da lavanderia lava-lava \n\r");
+  socket.write("Envie sua mensagem a baixo: \n\r\n\r");
 
   socket.on("data", (data) => {
     const message = data.toString();
@@ -24,13 +27,13 @@ const server = net.createServer((socket) => {
       })
     );
 
-    socket.write("Mensagem enviada com sucesso! \n");
+    socket.write("Mensagem enviada com sucesso! \n\r");
 
     closeConnection();
   });
 
   consumeQueue("laungeryMatriz", (msg) => {
-    socket.write("\n\n Nova mensagem:  \n");
+    socket.write("\n\n Nova mensagem:  \n\r");
     socket.write(msg.content.toString());
 
     assertQueue("laungery");

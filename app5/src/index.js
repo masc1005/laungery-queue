@@ -8,8 +8,8 @@ const {
 } = require("./config/rabbitmq");
 
 const server = net.createServer((socket) => {
-  socket.write("Bem-vindos ao servidor de filas da lavanderia lava-lava \n");
-  socket.write("Envie sua mensagem a baixo: \n\n");
+  socket.write("Bem-vindos ao servidor de filas da lavanderia lava-lava \n\r");
+  socket.write("Envie sua mensagem a baixo: \n\r\n\r");
 
   socket.on("data", (data) => {
     const message = data.toString();
@@ -24,13 +24,13 @@ const server = net.createServer((socket) => {
       })
     );
 
-    socket.write("Mensagem enviada com sucesso! \n");
+    socket.write("Mensagem enviada com sucesso! \n\r");
 
     closeConnection();
   });
 
   consumeQueue("laungery", (msg) => {
-    socket.write("\n\n Nova mensagem:  \n");
+    socket.write("\n\r\n\r Nova mensagem:  \n\r");
     socket.write(msg.content.toString());
   });
 });
